@@ -5,6 +5,7 @@ from django.forms.widgets import Input, RendererMixin
 from django.utils.safestring import mark_safe
 from django import forms
 from django.utils import formats, translation
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
 from django.contrib.admin.templatetags.admin_static import static
 from suit import utils
@@ -239,10 +240,7 @@ def wrap_as_input_group(s, append=''):
 def adjust_widget(field):
     widget = field.field.widget
     if isinstance(widget, ForeignKeyRawIdWidget):
-        try:
-            field = unicode(field)
-        except NameError:
-            field = str(field)
+        field = force_text(field)
         field = field.replace('RawIdAdminField', 'RawIdAdminField form-control')
         field = field.replace('<a', '<span class="input-group-btn"><a')
         field = field.replace('</a>', '<span class="glyphicon glyphicon-search"'
@@ -263,10 +261,7 @@ def adjust_widget(field):
         return mark_safe(field)
 
     elif isinstance(widget, RelatedFieldWidgetWrapper):
-        try:
-            field = unicode(field)
-        except NameError:
-            field = str(field)
+        field = force_text(field)
         # field = field.replace('RawIdAdminField', 'RawIdAdminField form-control')
         field = field.replace('<a', '<span class="input-group-btn"><a')
         field = field.replace('</a>', '<span class="glyphicon glyphicon-plus-sign color-success"'
