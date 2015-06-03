@@ -118,9 +118,15 @@
                     }
                 }
             } else if ($(input).hasClass('suit-sortable')) {
+                console.log(input);
+                console.log(input.defaultValue);
+                console.log(input.value);
                 if (input.defaultValue == input.value && input.value == 0) {
+                    console.log('filtered');
+                    console.log('--------->');
                     return false;
                 }
+                console.log('<---------');
             }
             return true;
         }
@@ -143,7 +149,10 @@
                             // Since jQuery serialize() doesn't include type=file do additional check
                         || $changed_fields.find(":input[type='file']").addBack().length) {
                         value = i++;
-                        $input.val(value);
+                        if (this.getAttribute('value') != null) {
+                            // only update the value if this isn't a new empty template
+                            $input.val(value);
+                        }
                     }
                 });
             });

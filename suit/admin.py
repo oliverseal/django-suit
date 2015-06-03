@@ -122,7 +122,7 @@ class SortableStackedInlineBase(SortableModelAdminBase):
             kwargs['widget'] = copy.deepcopy(
                 SortableListForm.Meta.widgets['order'])
             kwargs['widget'].attrs['class'] += ' suit-sortable-stacked'
-            kwargs['widget'].attrs['rowclass'] = ' suit-sortable-stacked-row'
+            kwargs['widget'].attrs['rowclass'] = 'suit-sortable-stacked-row'
         return super(SortableStackedInlineBase, self).formfield_for_dbfield(
             db_field, **kwargs)
 
