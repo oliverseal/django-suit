@@ -2,10 +2,10 @@ import copy
 from django.conf import settings
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin.views.main import ChangeList
-from django.forms import ModelForm
+from django.forms import ModelForm, NumberInput
 from django.contrib import admin
 from django.db import models
-from suit.widgets import NumberInput, SuitSplitDateTimeWidget
+from suit.widgets import SuitSplitDateTimeWidget
 try:
     # Django 1.8 +
     from django.contrib.contenttypes import admin as ct_admin
@@ -201,4 +201,3 @@ if 'cms' in settings.INSTALLED_APPS:
         }
     except ImportError:
         pass
-
