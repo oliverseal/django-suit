@@ -177,16 +177,30 @@
         }
     }
 }
-.table.table-form-like {
-    background-color: @form-bg-color;
-    > tbody > tr > td, th {
-        border-color: @body-bg-color;
+.table {
+    &.table-form-like {
+        background-color: @form-bg-color;
+        > tbody > tr > td, th {
+            border-color: @body-bg-color;
+        }
+        > tbody > tr > th {
+            background-color: #fff;
+            font-weight: normal;
+        }
+        > tbody > tr > td {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        &.table-condensed {
+            > tbody > tr > th {
+                padding-right: 10px;
+            }
+        }
     }
-    th {
-        background-color: #fff;
-        font-weight: normal;
-    }
-    td {
-        padding-left: 15px;
+    &.table-non-fluid {
+        width: auto !important;
+        th {
+            min-width: 150px;
+        }
     }
 }
