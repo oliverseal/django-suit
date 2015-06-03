@@ -2,11 +2,15 @@ import copy
 from django.conf import settings
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin.views.main import ChangeList
-from django.contrib.contenttypes.admin import GenericTabularInline, GenericStackedInline
-from django.forms import ModelForm, NumberInput
+from django.forms import ModelForm
 from django.contrib import admin
 from django.db import models
-from suit.widgets import SuitSplitDateTimeWidget
+from suit.widgets import NumberInput, SuitSplitDateTimeWidget
+try:
+    # Django 1.8 +
+    from django.contrib.contenttypes import admin as ct_admin
+except ImportError:
+    from django.contrib.contenttypes import generic as ct_admin
 
 
 class SortableModelAdminBase(object):
@@ -23,6 +27,7 @@ class SortableListForm(ModelForm):
     """
     Just Meta holder class
     """
+
     class Meta:
         widgets = {
             'order': NumberInput(
@@ -64,7 +69,7 @@ class SortableTabularInline(SortableTabularInlineBase, admin.TabularInline):
 
 
 class SortableGenericTabularInline(SortableTabularInlineBase,
-                                   GenericTabularInline):
+                                   ct_admin.GenericTabularInline):
     pass
 
 
@@ -92,6 +97,15 @@ class SortableStackedInlineBase(SortableModelAdminBase):
                     continue
 
                 fields = line.get('fields')
+
+                # Some use tuples for fields however they are immutable
+                if isinstance(fields, tuple):
+                    raise AssertionError(
+                        "The fields attribute of your Inline is a tuple. "
+                        "This must be list as we may need to modify it and "
+                        "tuples are immutable."
+                    )
+
                 if self.sortable in fields:
                     fields.remove(self.sortable)
 
@@ -118,7 +132,7 @@ class SortableStackedInline(SortableStackedInlineBase, admin.StackedInline):
 
 
 class SortableGenericStackedInline(SortableStackedInlineBase,
-                                   GenericStackedInline):
+                                   ct_admin.GenericStackedInline):
     pass
 
 
@@ -187,3 +201,4 @@ if 'cms' in settings.INSTALLED_APPS:
         }
     except ImportError:
         pass
+
