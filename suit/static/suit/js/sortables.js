@@ -118,15 +118,9 @@
                     }
                 }
             } else if ($(input).hasClass('suit-sortable')) {
-                console.log(input);
-                console.log(input.defaultValue);
-                console.log(input.value);
                 if (input.defaultValue == input.value && input.value == 0) {
-                    console.log('filtered');
-                    console.log('--------->');
                     return false;
                 }
-                console.log('<---------');
             }
             return true;
         }
