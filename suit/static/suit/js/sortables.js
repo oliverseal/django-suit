@@ -119,6 +119,8 @@
                 }
             } else if ($(input).hasClass('suit-sortable')) {
                 if (input.defaultValue == input.value && input.value == 0) {
+                    // console.log('changed');
+                    // console.log(input);
                     return false;
                 }
             }
@@ -130,12 +132,15 @@
             var $last_input = $inputs.last();
             var selector = $(this).selector;
             $($last_input[0].form).submit(function (e) {
+                e.preventDefault();
                 var i = 0, value;
                 $(selector).each(function () {
                     var $input = $(this);
                     var fieldset_id = $input.attr('name').split(/-\d+-/)[0];
                     // Check if any of new dynamic block values has been added
                     var $set_block = $input.closest('.dynamic-' + fieldset_id);
+                    // console.log($set_block[0]);
+                    // console.log($set_block.hasClass('has_original'));
                     var $changed_fields = $set_block.find(":input[value!=''][type!='hidden']").filter(filter_unchanged);
                     if (!$set_block.length
                         || $set_block.hasClass('has_original')
@@ -143,11 +148,13 @@
                             // Since jQuery serialize() doesn't include type=file do additional check
                         || $changed_fields.find(":input[type='file']").addBack().length) {
                         value = i++;
-                        if (this.getAttribute('value') != null) {
-                            // only update the value if this isn't a new empty template
-                            $input.val(value);
-                        }
+                        // console.log('updating sortable');
+                        $input.val(value);
+                        // console.log(value);
+                        // console.log(this.value);
                     }
+                    // console.log(this);
+                    // console.log('00000000000000000000000000000000');
                 });
             });
         }
