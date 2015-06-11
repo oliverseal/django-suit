@@ -105,6 +105,8 @@
 
         // Filters out unchanged checkboxes, selects and sortable field itself
         function filter_unchanged(i, input) {
+            if (input.getAttribute('value') == undefined)
+                return false;
             if (input.type == 'checkbox') {
                 if (input.defaultChecked == input.checked) {
                     return false;
@@ -118,9 +120,7 @@
                     }
                 }
             } else if ($(input).hasClass('suit-sortable')) {
-                if (input.defaultValue == input.value && input.value == 0) {
-                    // console.log('changed');
-                    // console.log(input);
+                if (input.defaultValue == input.value && input.value.toString() == '0') {
                     return false;
                 }
             }
@@ -132,29 +132,25 @@
             var $last_input = $inputs.last();
             var selector = $(this).selector;
             $($last_input[0].form).submit(function (e) {
-                e.preventDefault();
                 var i = 0, value;
                 $(selector).each(function () {
                     var $input = $(this);
+                    // skip the django template for this inline
+                    if (this.parentNode.classList.contains('empty-form'))
+                        return;
                     var fieldset_id = $input.attr('name').split(/-\d+-/)[0];
                     // Check if any of new dynamic block values has been added
                     var $set_block = $input.closest('.dynamic-' + fieldset_id);
-                    // console.log($set_block[0]);
-                    // console.log($set_block.hasClass('has_original'));
                     var $changed_fields = $set_block.find(":input[value!=''][type!='hidden']").filter(filter_unchanged);
                     if (!$set_block.length
                         || $set_block.hasClass('has_original')
+                        // are there any changes even?
                         || $changed_fields.serialize()
-                            // Since jQuery serialize() doesn't include type=file do additional check
+                        // Since jQuery serialize() doesn't include type=file do additional check
                         || $changed_fields.find(":input[type='file']").addBack().length) {
                         value = i++;
-                        // console.log('updating sortable');
                         $input.val(value);
-                        // console.log(value);
-                        // console.log(this.value);
                     }
-                    // console.log(this);
-                    // console.log('00000000000000000000000000000000');
                 });
             });
         }
