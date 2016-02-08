@@ -11,6 +11,7 @@ try:
     from django.contrib.contenttypes import admin as ct_admin
 except ImportError:
     from django.contrib.contenttypes import generic as ct_admin
+from suit.compat import ct_admin
 
 
 class SortableModelAdminBase(object):

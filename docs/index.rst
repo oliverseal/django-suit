@@ -28,7 +28,7 @@ Resources
 * Github: https://github.com/darklow/django-suit
 * Demo app on Github: https://github.com/darklow/django-suit-examples
 * Changelog: `Changelog.rst <https://github.com/darklow/django-suit/blob/develop/CHANGELOG.rst>`_
-* Supports: Django 1.4-1.7. Python: 2.6-3.4 |master|
+* Supports: Django 1.4-1.8. Python: 2.6-3.4 |master|
 * `Supported apps`_
 
 
@@ -45,11 +45,11 @@ Click on screenshot for live demo:
 Installation
 ============
 
-1. You can get Django Suit by using pip or easy_install::
+1. You can get stable version of Django Suit by using pip or easy_install::
 
-    pip install django-suit
+    pip install django-suit==0.2.16
     # or
-    easy_install django-suit
+    easy_install django-suit==0.2.16
 
 2. You will need to add the ``'suit'`` application to the ``INSTALLED_APPS`` setting of your Django project ``settings.py`` file.::
 
@@ -89,6 +89,14 @@ Develop branch
   pip install https://github.com/darklow/django-suit/tarball/develop
 
 
+Bootstrap3 branch
+-----------------
+
+`BS3 branch <https://github.com/darklow/django-suit/commits/bs3>`_ is considered as alpha version and is not yet ready for production use. To install latest bs3 version use::
+
+  pip install django-suit==0.3a1
+
+
 Customization
 =============
 
@@ -108,7 +116,7 @@ Templates
 
 You must extend ``base_site.html`` template to customize footer links, copyright text or to add extra JS/CSS files. Example file is available on `github <https://github.com/darklow/django-suit/blob/master/suit/templates/admin/base_site.html>`_.
 
-Copy customized ``base_site.html`` `template file <https://github.com/darklow/django-suit/blob/master/suit/templates/admin/base_site.html>`_ to your project's main application ``template/admin/`` directory and un-comment and edit the blocks you would like to extend.
+Copy customized ``base_site.html`` `template file <https://github.com/darklow/django-suit/blob/master/suit/templates/admin/base_site.html>`_ to your project's main application ``templates/admin/`` directory and un-comment and edit the blocks you would like to extend.
 
 Alternatively you can copy ``base_site.html`` to any of template directories, which are defined in ``TEMPLATE_DIRS`` setting (if any). By default Django looks in every registered application ``templates/`` dir.
 
@@ -196,7 +204,7 @@ Support
 =======
 
 * Github: Use `django-suit github issues <https://github.com/darklow/django-suit/issues>`_, if you have any problems using Django Suit.
-* IRC Channel: Feel free to join us at ``#django-suit`` on ``irc.freenode.net`` for a chat.
+
 
 Examples
 --------
@@ -209,7 +217,7 @@ Supported apps
 
 Besides Django admin, Django Suit supports following third-party apps:
 
-* `django-cms <https://github.com/divio/django-cms>`_ (since v2.3.5) - `Example <http://djangosuit.com/admin/cms/page/>`_ `Read notes <https://github.com/darklow/django-suit/issues/77>`_
+* `django-cms <https://github.com/divio/django-cms>`_ (v2.3.5 - v2.4.3) - `Example <http://djangosuit.com/admin/cms/page/>`_ `Read notes <https://github.com/darklow/django-suit/issues/77>`_
 * `django-filer <https://github.com/stefanfoulis/django-filer>`_ (since v0.9.4) - `Example <http://djangosuit.com/admin/filer/folder/>`_
 * `django-mptt <https://github.com/django-mptt/django-mptt/>`_ - `Example <http://djangosuit.com/admin/examples/category/>`_
 * `django-reversion <https://github.com/etianen/django-reversion>`_ - `Example <http://djangosuit.com/admin/examples/reversioneditem/>`_

@@ -24,9 +24,9 @@
         <div class="{{ field|suit_form_field_class:fieldset }}">
           {#        {{ field.field.field.widget.can_add_related }}#}
 
-          {% if field.is_readonly %}
-            <p>{{ field.contents }}</p>
-          {% else %}
+        {% if field.is_readonly %}
+            <span class="readonly">{{ field|field_contents_foreign_linked|linebreaksbr }}</span>
+        {% else %}
             {{ field.field }}
           {% endif %}
 
