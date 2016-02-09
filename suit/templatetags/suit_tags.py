@@ -6,9 +6,11 @@ from django.core.urlresolvers import NoReverseMatch, reverse
 from django.db.models import ForeignKey
 from django.template.defaulttags import NowNode
 from django.utils.safestring import mark_safe
+from suit.config import get_config
 from suit import config
 from suit import utils
 
+django_version = utils.django_major_version()
 register = template.Library()
 
 
