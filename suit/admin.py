@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin.views.main import ChangeList
 from django.contrib.contenttypes.admin import GenericTabularInline, GenericStackedInline
-from django.forms import ModelForm
+from django.forms import ModelForm, NumberInput
 from django.contrib import admin
 from django.db import models
 from suit.widgets import SuitSplitDateTimeWidget
