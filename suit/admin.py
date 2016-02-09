@@ -7,6 +7,7 @@ from django.forms import ModelForm, NumberInput
 from django.contrib import admin
 from django.db import models
 from suit.widgets import SuitSplitDateTimeWidget
+from suit.compat import ct_admin
 
 
 class SortableModelAdminBase(object):
@@ -64,7 +65,7 @@ class SortableTabularInline(SortableTabularInlineBase, admin.TabularInline):
 
 
 class SortableGenericTabularInline(SortableTabularInlineBase,
-                                   GenericTabularInline):
+                                   ct_admin.GenericTabularInline):
     pass
 
 
@@ -127,7 +128,7 @@ class SortableStackedInline(SortableStackedInlineBase, admin.StackedInline):
 
 
 class SortableGenericStackedInline(SortableStackedInlineBase,
-                                   GenericStackedInline):
+                                   ct_admin.GenericStackedInline):
     pass
 
 
