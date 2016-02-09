@@ -72,8 +72,8 @@
                       {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
                     </a>
                   </div>
-                {% endif %}
               {% endblock %}
+            {% endif %}
             </div>
           {% endblock %}
           {% block search %}{% search_form cl %}{% endblock %}
